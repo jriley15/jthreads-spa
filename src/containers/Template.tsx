@@ -2,6 +2,7 @@ import React from "react";
 import Routes from "./Routes";
 import Navbar from "../components/Navbar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
+import SideDrawer from "../components/SideDrawer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,10 +17,11 @@ const Template: React.FC = () => {
 
   return (
     <>
-      <Navbar />
-      <div className={classes.mainContent}>
-        <Routes />
-      </div>
+      <SideDrawer>
+        <div className={classes.mainContent}>
+          <Routes />
+        </div>
+      </SideDrawer>
     </>
   );
 };

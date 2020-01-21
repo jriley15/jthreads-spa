@@ -15,7 +15,7 @@ const styles = {
   }
 };
 
-function RoundedButton(props: Props) {
+const RoundedButton: React.FC<Props> = (props: Props) => {
   const { classes, children, className, ...other } = props;
 
   return (
@@ -23,6 +23,6 @@ function RoundedButton(props: Props) {
       {children || "class names"}
     </Button>
   );
-}
+};
 
 export default withStyles(styles)(RoundedButton);

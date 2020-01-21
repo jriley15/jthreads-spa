@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Home: React.FC = () => {
+const Namespaces: React.FC = () => {
   const classes = useStyles();
-  return <div className={classes.root}>Home</div>;
+  return <div className={classes.root}>Namespaces</div>;
 };
 
-export default Home;
+export default Namespaces;
