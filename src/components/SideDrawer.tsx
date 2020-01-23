@@ -20,8 +20,9 @@ import { Link } from "react-router-dom";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import HelpIcon from "@material-ui/icons/Help";
 import SettingsIcon from "@material-ui/icons/Settings";
+import MoneyIcon from "@material-ui/icons/AttachMoney";
 
-const drawerWidth = 200;
+const drawerWidth = 220;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,20 +42,23 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: drawerWidth
     },
-    toolbar: {
-      minHeight: theme.spacing(6)
-    },
+    toolbar: theme.mixins.toolbar,
+
     content: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.default,
-      padding: theme.spacing(3)
+      //flexGrow: 1
+      //backgroundColor: theme.palette.background.default
+      //padding: theme.spacing(3)
+      width: "100%"
     },
     logo: {
-      color: "#6f41f8",
+      //color: "#6f41f8",
       marginRight: theme.spacing(1)
     },
     sideNav: {
-      paddingLeft: theme.spacing(2)
+      paddingLeft: theme.spacing(2),
+      backgroundColor: "#6f41f8",
+      color: "white",
+      boxShadow: "inset 0 0 5px rgba(0, 0, 0, 0.1)"
     },
     selectedItem: {
       borderLeft: "2px solid #6f41f8",
@@ -62,11 +66,11 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "rgb(111, 65, 248, 0.1);"
     },
     listItem: {
-      borderLeft: "2px solid #FFFFFF"
+      borderLeft: "2px solid #FFFFFF",
+      color: theme.palette.text.secondary
     },
     listItemText: {
-      fontWeight: theme.typography.fontWeightMedium,
-      color: theme.palette.text.secondary
+      fontWeight: theme.typography.fontWeightMedium
     },
     selectedIcon: {
       color: "#6f41f8"
@@ -80,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SideDrawer({ children }: { children: any }) {
   const classes = useStyles();
   const location = useLocation();
-  console.log(location);
+
   return (
     <div className={classes.root}>
       <Navbar className={classes.appBar} />
@@ -145,6 +149,30 @@ export default function SideDrawer({ children }: { children: any }) {
               primaryTypographyProps={{ className: classes.listItemText }}
             />
           </ListItem>
+          <ListItem
+            button
+            className={
+              location.pathname === "/billing"
+                ? classes.selectedItem
+                : classes.listItem
+            }
+            component={Link}
+            to="/billing"
+          >
+            <ListItemIcon classes={{ root: classes.iconRoot }}>
+              <MoneyIcon
+                className={
+                  location.pathname === "/billing" ? classes.selectedIcon : ""
+                }
+              />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Billing"}
+              primaryTypographyProps={{ className: classes.listItemText }}
+            />
+          </ListItem>
+
+          <Divider />
           <ListItem
             button
             className={

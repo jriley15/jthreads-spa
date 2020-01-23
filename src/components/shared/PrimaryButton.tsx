@@ -3,11 +3,6 @@ import clsx from "clsx";
 import Button from "@material-ui/core/Button";
 import { withStyles, WithStyles } from "@material-ui/core/styles";
 
-interface Props extends WithStyles<typeof styles> {
-  children?: React.ReactNode;
-  className?: string;
-}
-
 const styles = {
   root: {
     background: "linear-gradient(to right, #4d5af5 0%, #6f41f8 100%)",
@@ -20,7 +15,7 @@ const styles = {
   }
 };
 
-function PrimaryButton(props: Props) {
+function PrimaryButton(props: any) {
   const { classes, children, className, ...other } = props;
 
   return (

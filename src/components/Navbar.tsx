@@ -13,12 +13,12 @@ import RoundedButton from "./shared/RoundedButton";
 import PrimaryButton from "./shared/PrimaryButton";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
+import { grey } from "@material-ui/core/colors";
+import useAuth from "../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1
-    },
+    root: {},
     flexGrow: {
       flexGrow: 1
     },
@@ -28,12 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     search: {
       position: "relative",
-      borderRadius: theme.shape.borderRadius,
-
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.25)
-      }
+      borderRadius: theme.shape.borderRadius
     },
     searchIcon: {
       width: theme.spacing(7),
@@ -45,9 +40,11 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center"
     },
     inputRoot: {
-      color: "inherit",
-      border: "1px solid " + theme.palette.divider,
-      borderRadius: 25
+      borderRadius: 25,
+      backgroundColor: fade(grey[500], 0.15),
+      "&:hover": {
+        backgroundColor: fade(grey[500], 0.25)
+      }
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 7),
@@ -65,6 +62,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Navbar({ ...props }) {
   const classes = useStyles();
+  const { isAuthenticated, claims, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("token");
+  };
 
   return (
     <div className={classes.root}>
@@ -84,7 +87,14 @@ export default function Navbar({ ...props }) {
             />
           </div>
           <div className={classes.flexGrow} />
-          <PrimaryButton className={classes.navButton}>Sign out</PrimaryButton>
+          <Typography>
+            {isAuthenticated
+              ? "Signed in as " + claims.email
+              : "not authenticated"}
+          </Typography>
+          <PrimaryButton className={classes.navButton} onClick={handleLogout}>
+            Sign out
+          </PrimaryButton>
         </Toolbar>
       </AppBar>
     </div>

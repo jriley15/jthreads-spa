@@ -1,14 +1,25 @@
-interface AuthState {
+interface Claims {
+  email: string;
+  id: string;
+  expires: Number;
+  issuer: string;
+}
+export interface AuthState {
   isAuthenticated: boolean;
   token: string;
-  user: object;
+  claims: Claims;
   checkedForAuth: boolean;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   token: "",
-  user: {},
+  claims: {
+    email: "",
+    id: "",
+    expires: 0,
+    issuer: ""
+  },
   checkedForAuth: false
 };
 
@@ -19,7 +30,16 @@ const authReducer = (state: AuthState, action: any) => {
     case "LOGIN":
       return {
         ...state,
-        user: action.payload,
+        claims: {
+          email:
+            action.payload[
+              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+            ],
+          id:
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+          expires: "exp",
+          issuer: "iss"
+        },
         isAuthenticated: true,
         token: action.token
       };

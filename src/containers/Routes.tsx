@@ -7,6 +7,7 @@ const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/authenticate" component={Home} />
       <Route exact path="/namespaces" component={Namespaces} />
     </Switch>
   );
