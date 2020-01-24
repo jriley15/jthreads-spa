@@ -22,7 +22,7 @@ const styles = {
   }
 };
 
-function SecondaryButton(props: Props) {
+function SecondaryButton(props: any) {
   const { classes, children, className, ...other } = props;
 
   return (

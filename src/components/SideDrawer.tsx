@@ -48,7 +48,8 @@ const useStyles = makeStyles((theme: Theme) =>
       //flexGrow: 1
       //backgroundColor: theme.palette.background.default
       //padding: theme.spacing(3)
-      width: "100%"
+      width: "100%",
+      maxWidth: 900
     },
     logo: {
       //color: "#6f41f8",
@@ -128,7 +129,7 @@ export default function SideDrawer({ children }: { children: any }) {
           <ListItem
             button
             className={
-              location.pathname === "/namespaces"
+              location.pathname.startsWith("/namespaces")
                 ? classes.selectedItem
                 : classes.listItem
             }
@@ -138,7 +139,7 @@ export default function SideDrawer({ children }: { children: any }) {
             <ListItemIcon classes={{ root: classes.iconRoot }}>
               <LibraryBooksIcon
                 className={
-                  location.pathname === "/namespaces"
+                  location.pathname.startsWith("/namespaces")
                     ? classes.selectedIcon
                     : ""
                 }

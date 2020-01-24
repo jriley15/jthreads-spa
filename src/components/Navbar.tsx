@@ -71,7 +71,7 @@ export default function Navbar({ ...props }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" {...props} elevation={0}>
+      <AppBar position="fixed" {...props} elevation={0} color="secondary">
         <Toolbar>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -92,9 +92,9 @@ export default function Navbar({ ...props }) {
               ? "Signed in as " + claims.email
               : "not authenticated"}
           </Typography>
-          <PrimaryButton className={classes.navButton} onClick={handleLogout}>
+          {/*<PrimaryButton className={classes.navButton} onClick={handleLogout}>
             Sign out
-          </PrimaryButton>
+            </PrimaryButton>*/}
         </Toolbar>
       </AppBar>
     </div>

@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Typography, Box, Theme } from "@material-ui/core";
 import PrimaryButton from "../components/shared/PrimaryButton";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,11 +49,13 @@ export default function Namespaces() {
       <Box
         display="flex"
         justifyContent="space-between"
-        alignItems="flex-end"
+        alignItems="flex-start"
         className={classes.topActions}
       >
-        <Typography variant="h4">Namespaces (0)</Typography>
-        <PrimaryButton>Create</PrimaryButton>
+        <Typography variant="h6">Namespaces (0)</Typography>
+        <PrimaryButton component={Link} to="/namespaces/create">
+          Create Namespace
+        </PrimaryButton>
       </Box>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
