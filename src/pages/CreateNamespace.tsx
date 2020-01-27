@@ -9,9 +9,10 @@ import {
   Breadcrumbs,
   Divider,
   TextField,
-  Paper
+  Paper,
+  Backdrop
 } from "@material-ui/core";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink, useHistory } from "react-router-dom";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Link from "@material-ui/core/Link";
 import { Formik } from "formik";
@@ -20,6 +21,7 @@ import PrimaryButton from "../components/shared/PrimaryButton";
 import SecondaryButton from "../components/shared/SecondaryButton";
 import useApi from "../hooks/useApi";
 import { CircularProgress } from "@material-ui/core";
+import useNamespaces from "../hooks/useNamespaces";
 
 interface Namespace {
   [key: string]: any;
@@ -42,6 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       marginTop: theme.spacing(2),
       marginRight: theme.spacing(1)
+    },
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: "#fff"
     }
   })
 );
@@ -50,6 +56,8 @@ const CreateNamespace: React.FC = () => {
   const classes = useStyles();
   const initialValues: Namespace = { name: "test name", url: "test url" };
   const { post } = useApi();
+  const { namespaces, fetchNamespaces } = useNamespaces();
+  const history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -59,7 +67,7 @@ const CreateNamespace: React.FC = () => {
         className={classes.breadCrumb}
       >
         <Link color="inherit" component={ReactRouterLink} to="/namespaces">
-          <Typography variant="h6">Namespaces (0)</Typography>
+          <Typography variant="h6">Namespaces ({namespaces.length})</Typography>
         </Link>
         <Typography variant="h6" color="textPrimary">
           Create
@@ -81,6 +89,10 @@ const CreateNamespace: React.FC = () => {
               if (response.success) {
                 //resetForm();
                 //setOpen(false)
+                await fetchNamespaces();
+                history.push(
+                  "/namespaces/" + response.data.namespaceId + "/setup"
+                );
               } else {
                 setErrors(response.errors);
               }
@@ -142,7 +154,11 @@ const CreateNamespace: React.FC = () => {
                   onClick={handleSubmit}
                   className={classes.button}
                 >
-                  {isSubmitting ? <CircularProgress size={20} /> : "Submit"}
+                  {isSubmitting ? (
+                    <CircularProgress color="secondary" size={20} />
+                  ) : (
+                    "Submit"
+                  )}
                 </PrimaryButton>
                 <SecondaryButton
                   className={classes.button}
@@ -151,6 +167,9 @@ const CreateNamespace: React.FC = () => {
                 >
                   Cancel
                 </SecondaryButton>
+                <Backdrop className={classes.backdrop} open={isSubmitting}>
+                  <CircularProgress color="inherit" />
+                </Backdrop>
               </form>
             )}
           </Formik>

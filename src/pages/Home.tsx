@@ -22,19 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Home: React.FC = () => {
   const classes = useStyles();
-
-  const { search } = useLocation();
-  const queryParams = queryString.parse(search);
-  const { login } = useAuth();
-  const history = useHistory();
-
-  console.log(queryParams);
-
-  if (queryParams.token) {
-    login(queryParams.token as string);
-    history.push("/");
-  }
-
   return <div className={classes.root}>Home</div>;
 };
 

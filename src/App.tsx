@@ -5,16 +5,19 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Theme from "./containers/Theme";
 import store from "./redux/store";
 import Template from "./containers/Template";
+import { CookiesProvider } from "react-cookie";
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <Theme>
-        <CssBaseline />
-        <Router>
-          <Template />
-        </Router>
-      </Theme>
+      <CookiesProvider>
+        <Theme>
+          <CssBaseline />
+          <Router>
+            <Template />
+          </Router>
+        </Theme>
+      </CookiesProvider>
     </Provider>
   );
 };

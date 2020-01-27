@@ -64,11 +64,6 @@ export default function Navbar({ ...props }) {
   const classes = useStyles();
   const { isAuthenticated, claims, logout } = useAuth();
 
-  const handleLogout = () => {
-    logout();
-    localStorage.removeItem("token");
-  };
-
   return (
     <div className={classes.root}>
       <AppBar position="fixed" {...props} elevation={0} color="secondary">

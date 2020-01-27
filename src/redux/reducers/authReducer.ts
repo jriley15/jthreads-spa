@@ -8,7 +8,6 @@ export interface AuthState {
   isAuthenticated: boolean;
   token: string;
   claims: Claims;
-  checkedForAuth: boolean;
 }
 
 const initialState: AuthState = {
@@ -19,8 +18,7 @@ const initialState: AuthState = {
     id: "",
     expires: 0,
     issuer: ""
-  },
-  checkedForAuth: false
+  }
 };
 
 const authReducer = (state: AuthState, action: any) => {
@@ -48,9 +46,6 @@ const authReducer = (state: AuthState, action: any) => {
       return {
         ...initialState
       };
-
-    case "CHECKED_FOR_AUTH":
-      return { ...state, checkedForAuth: true };
 
     default:
       return state;

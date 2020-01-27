@@ -18,12 +18,6 @@ const Template: React.FC = () => {
   const classes = useStyles();
   let { login } = useAuth();
 
-  useEffect(() => {
-    //load auth from localstorage
-    let token = localStorage.getItem("token");
-    if (token) login(token);
-  }, []);
-
   return (
     <>
       <SideDrawer>

@@ -15,7 +15,8 @@ export default function useApi() {
     let response = {};
 
     await Axios.post(api + url, body, {
-      headers: headers
+      headers: headers,
+      withCredentials: true
     })
       .then(res => {
         response = res.data;
@@ -34,7 +35,8 @@ export default function useApi() {
 
     await Axios.get(api + url, {
       params: params,
-      headers: headers
+      headers: headers,
+      withCredentials: true
     })
       .then(res => {
         response = res.data;
