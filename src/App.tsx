@@ -6,6 +6,7 @@ import Theme from "./containers/Theme";
 import store from "./redux/store";
 import Template from "./containers/Template";
 import { CookiesProvider } from "react-cookie";
+import useAuth from "./hooks/useAuth";
 
 const App: React.FC = () => {
   return (

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import jwt_decode from "jwt-decode";
 import { AuthState } from "../redux/reducers/authReducer";
 import { useCookies } from "react-cookie";
+import config from "../util/config";
 
 interface RootState {
   authState: AuthState;
@@ -25,6 +26,7 @@ const useAuth = () => {
 
   if (!authState.token) {
     if (cookies.token) login(cookies.token);
+    else window.location.replace(config.landing + "?login=true");
   }
 
   return {

@@ -31,10 +31,16 @@ const authReducer = (state: AuthState, action: any) => {
         claims: {
           email:
             action.payload[
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
             ],
           id:
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+            action.payload[
+              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+            ],
+          name:
+            action.payload[
+              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+            ],
           expires: "exp",
           issuer: "iss"
         },
