@@ -34,6 +34,7 @@ import TableRow from "@material-ui/core/TableRow";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import { grey } from "@material-ui/core/colors";
+import NamespaceSetup from "../components/NamespaceSetup";
 
 interface Namespace {
   [key: string]: any;
@@ -238,7 +239,7 @@ const ViewNamespace: React.FC = () => {
           </TableContainer>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <NamespaceSetup namespace={namespace} />
         </TabPanel>
         <TabPanel value={value} index={2}>
           Auto approve comments, Allowed origins, pause thread creation, allow

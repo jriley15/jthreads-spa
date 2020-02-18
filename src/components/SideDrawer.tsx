@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -21,6 +21,11 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import HelpIcon from "@material-ui/icons/Help";
 import SettingsIcon from "@material-ui/icons/Settings";
 import MoneyIcon from "@material-ui/icons/AttachMoney";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import { Collapse } from "@material-ui/core";
+import AppsIcon from "@material-ui/icons/Apps";
+import PersonIcon from "@material-ui/icons/Person";
 
 const drawerWidth = 220;
 
@@ -78,6 +83,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     iconRoot: {
       minWidth: theme.spacing(5)
+    },
+    nested: {
+      paddingLeft: theme.spacing(5)
     }
   })
 );
@@ -85,6 +93,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SideDrawer({ children }: { children: any }) {
   const classes = useStyles();
   const location = useLocation();
+  const [helpOpen, setHelpOpen] = useState(true);
+
+  const handleHelpClick = () => {
+    setHelpOpen(!helpOpen);
+  };
 
   return (
     <div className={classes.root}>
@@ -137,7 +150,7 @@ export default function SideDrawer({ children }: { children: any }) {
             to="/namespaces"
           >
             <ListItemIcon classes={{ root: classes.iconRoot }}>
-              <LibraryBooksIcon
+              <AppsIcon
                 className={
                   location.pathname.startsWith("/namespaces")
                     ? classes.selectedIcon
@@ -173,29 +186,30 @@ export default function SideDrawer({ children }: { children: any }) {
             />
           </ListItem>
 
-          <Divider />
           <ListItem
             button
             className={
-              location.pathname === "/help"
+              location.pathname === "/profile"
                 ? classes.selectedItem
                 : classes.listItem
             }
             component={Link}
-            to="/help"
+            to="/profile"
           >
             <ListItemIcon classes={{ root: classes.iconRoot }}>
-              <HelpIcon
+              <PersonIcon
                 className={
-                  location.pathname === "/help" ? classes.selectedIcon : ""
+                  location.pathname === "/profile" ? classes.selectedIcon : ""
                 }
               />
             </ListItemIcon>
             <ListItemText
-              primary={"Help"}
+              primary={"Profile"}
               primaryTypographyProps={{ className: classes.listItemText }}
             />
           </ListItem>
+
+          <Divider />
           <ListItem
             button
             className={
@@ -218,6 +232,50 @@ export default function SideDrawer({ children }: { children: any }) {
               primaryTypographyProps={{ className: classes.listItemText }}
             />
           </ListItem>
+          <ListItem
+            button
+            onClick={handleHelpClick}
+            className={classes.listItem}
+          >
+            <ListItemIcon classes={{ root: classes.iconRoot }}>
+              <HelpIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Help"}
+              primaryTypographyProps={{ className: classes.listItemText }}
+            />
+            {helpOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={helpOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem
+                button
+                className={`${classes.nested} ${
+                  location.pathname === "/help/docs"
+                    ? classes.selectedItem
+                    : classes.listItem
+                }`}
+                component={Link}
+                to="/help/docs"
+              >
+                <ListItemIcon classes={{ root: classes.iconRoot }}>
+                  {
+                    <LibraryBooksIcon
+                      className={
+                        location.pathname === "/help/docs"
+                          ? classes.selectedIcon
+                          : ""
+                      }
+                    />
+                  }
+                </ListItemIcon>
+                <ListItemText
+                  primary="Docs"
+                  primaryTypographyProps={{ className: classes.listItemText }}
+                />
+              </ListItem>
+            </List>
+          </Collapse>
         </List>
       </Drawer>
       <main className={classes.content}>

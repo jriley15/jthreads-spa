@@ -98,7 +98,8 @@ export default function Namespaces() {
           <TableHead>
             <TableRow>
               <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Url</TableCell>
+              <TableCell align="center">Id</TableCell>
+              <TableCell align="center">Total Threads</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -114,7 +115,8 @@ export default function Namespaces() {
                   <TableCell component="th" scope="row" align="center">
                     {namespace.name}
                   </TableCell>
-                  <TableCell align="center">{namespace.url}</TableCell>
+                  <TableCell align="center">{namespace.namespaceId}</TableCell>
+                  <TableCell align="center">{namespace.threads}</TableCell>
                   <TableCell align="center">
                     <PrimaryButton
                       component={Link}

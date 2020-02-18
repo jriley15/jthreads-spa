@@ -15,7 +15,6 @@ const useAuth = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
 
   const login = (token: string) => {
-    console.log("trying to login");
     dispatch({ type: "LOGIN", token: token, payload: jwt_decode(token) });
   };
 

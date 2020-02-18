@@ -2,6 +2,7 @@ interface Namespace {
   namespaceId: string;
   name: string;
   url: string;
+  threads: number;
 }
 export interface NamespaceState {
   namespaces: Array<Namespace>;
