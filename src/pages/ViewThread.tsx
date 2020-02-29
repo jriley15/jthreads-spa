@@ -111,7 +111,7 @@ export default function ViewThread() {
         >
           <Link color="inherit" component={ReactRouterLink} to="/namespaces">
             <Typography variant="h6">
-              Namespaces ({namespace?.threads})
+              Namespaces ({namespace?.namespaces})
             </Typography>
           </Link>
           <Link
